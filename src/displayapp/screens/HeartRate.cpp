@@ -111,5 +111,5 @@ void HeartRate::UpdateStartStopButton(bool isRunning) {
   if(isRunning)
     lv_label_set_text(label_startStop, "Stop");
   else
-    lv_label_set_text(label_startStop, "Start");
+    lv_label_set_text(label_startStop, "Begin");
 }
