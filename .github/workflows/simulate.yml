@@ -104,7 +104,7 @@ jobs:
         
     - name: Copy Watch Face Clock.cpp to LVGL for WebAssembly
       run:  |
-        cp src/DisplayApp/Screens/Clock.cpp /tmp/lvgl-wasm/clock
+        cp src/displayapp/screens/Clock.cpp /tmp/lvgl-wasm/clock
 
     - name: Build LVGL for WebAssembly
       run:  |
