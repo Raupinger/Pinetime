@@ -25,10 +25,9 @@
 #include "displayapp/screens/SystemInfo.h"
 #include "displayapp/screens/Tile.h"
 #include "displayapp/screens/Twos.h"
-#include "displayapp//screens/Calculator.h"
+#include "displayapp/screens/Calculator.h"
 #include "displayapp/screens/FlashLight.h"
 #include "displayapp/screens/BatteryInfo.h"
-#include "displayapp//screens/Calculator.h"
 #include "displayapp/screens/Steps.h"
 
 #include "drivers/Cst816s.h"
@@ -232,34 +231,6 @@ void DisplayApp::Refresh() {
 }
 
 void DisplayApp::RunningState() {
-//  clockScreen.SetCurrentDateTime(dateTimeController.CurrentDateTime());
-
-  if(!currentScreen->Refresh()) {
-    currentScreen.reset(nullptr);
-    lvgl.SetFullRefresh(Components::LittleVgl::FullRefreshDirections::Up);
-    onClockApp = false;
-    switch(nextApp) {
-      case Apps::None:
-      case Apps::Launcher: currentScreen.reset(new Screens::ApplicationList(this, settingsController)); break;
-      case Apps::Clock:
-        currentScreen.reset(new Screens::Clock(this, dateTimeController, batteryController, bleController, notificationManager, settingsController, heartRateController));
-        onClockApp = true;
-        break;
-      case Apps::SysInfo: currentScreen.reset(new Screens::SystemInfo(this, dateTimeController, batteryController, brightnessController, bleController, watchdog)); break;
-      case Apps::Meter: currentScreen.reset(new Screens::Meter(this)); break;
-      case Apps::StopWatch: currentScreen.reset(new Screens::StopWatch(this)); break;
-      case Apps::Twos: currentScreen.reset(new Screens::Twos(this)); break;
-      case Apps::Paint: currentScreen.reset(new Screens::InfiniPaint(this, lvgl)); break;
-      case Apps::Paddle: currentScreen.reset(new Screens::Paddle(this, lvgl)); break;
-      case Apps::Brightness : currentScreen.reset(new Screens::Brightness(this, brightnessController)); break;
-      case Apps::Music : currentScreen.reset(new Screens::Music(this, systemTask.nimble().music())); break;
-      case Apps::Navigation : currentScreen.reset(new Screens::Navigation(this, systemTask.nimble().navigation())); break;
-      case Apps::FirmwareValidation: currentScreen.reset(new Screens::FirmwareValidation(this, validator)); break;
-      case Apps::Notifications: currentScreen.reset(new Screens::Notifications(this, notificationManager, systemTask.nimble().alertService(), Screens::Notifications::Modes::Normal)); break;
-      case Apps::HeartRate: currentScreen.reset(new Screens::HeartRate(this, heartRateController)); break;
-      case Apps::Calculator: currentScreen.reset(new Screens::Calculator(this)); break;
-    }
-    nextApp = Apps::None;
   if (!currentScreen->Refresh()) {
     LoadApp(returnToApp, returnDirection);
   }
