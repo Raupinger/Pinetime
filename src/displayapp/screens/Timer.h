@@ -1,11 +1,14 @@
 #pragma once
 
+#include <memory>
 #include "Screen.h"
 #include "components/datetime/DateTimeController.h"
 #include "systemtask/SystemTask.h"
 #include "../LittleVgl.h"
 
 #include "components/timer/TimerController.h"
+#include "TimeSelector.h"
+
 
 namespace Pinetime::Applications::Screens {
   
@@ -34,9 +37,8 @@ namespace Pinetime::Applications::Screens {
     uint8_t minutesToSet = 0;
     Controllers::TimerController& timerController;
     
-    void createButtons();
     
-    lv_obj_t* time, * msecTime, * btnPlayPause, * txtPlayPause, * btnMinutesUp, * btnMinutesDown, * btnSecondsUp, * btnSecondsDown, * txtMUp,
-        * txtMDown, * txtSUp, * txtSDown;
+    lv_obj_t * btnPlayPause, * txtPlayPause;
+    std::unique_ptr<TimeSelector> timeSelector;
   };
 }
